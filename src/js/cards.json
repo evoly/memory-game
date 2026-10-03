@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "bear",
+    "image": "./images/bear.svg"
+  },
+  {
+    "id": 2,
+    "name": "cat",
+    "image": "./images/cat.svg"
+  },
+  {
+    "id": 3,
+    "name": "dog",
+    "image": "./images/dog.svg"
+  },
+  {
+    "id": 4,
+    "name": "fox",
+    "image": "./images/fox.svg"
+  },
+  {
+    "id": 5,
+    "name": "lion",
+    "image": "./images/lion.svg"
+  },
+  {
+    "id": 6,
+    "name": "monkey",
+    "image": "./images/monkey.svg"
+  },
+  {
+    "id": 7,
+    "name": "owl",
+    "image": "./images/owl.svg"
+  },
+  {
+    "id": 8,
+    "name": "panda",
+    "image": "./images/panda.svg"
+  },
+  {
+    "id": 9,
+    "name": "pig",
+    "image": "./images/pig.svg"
+  },
+  {
+    "id": 10,
+    "name": "rabbit",
+    "image": "./images/rabbit.svg"
+  }
+]
