@@ -5,4 +5,5 @@ export default {
   server: {
     open: true,
   },
+  base: '/memory-game/',
 }
