@@ -8,6 +8,7 @@ const createInitialState = () => ({
     isGameStarted: false,
     moves: 0,
     isAnimated: false,
+    timeOutId: null,
 });
 
 let state = createInitialState();
@@ -39,7 +40,7 @@ export const handleCardFlip = (card, id ) => {
     }
 
     state.isAnimated = true;
-    setTimeout(() => {     
+    state.timeOutId = setTimeout(() => {     
         state.flippedCards.map(({ card }) => card.classList.remove('flipped'));
         state.flippedCards = [];
         state.isAnimated = false;
@@ -49,8 +50,9 @@ export const handleCardFlip = (card, id ) => {
 }
 
 const newGame = () => {
+    clearTimeout(state.timeOutId);
     resetState();
-    state.isGameStarted = true;
+    // state.isGameStarted = true;
     return gameBoard({
         pairsToFind: state.pairsToFind,
         onCardFlip: handleCardFlip,
