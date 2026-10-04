@@ -1,22 +1,22 @@
-//import gameBoard from "./GameBoard";
 import newGame from "./game";
 import Button from "./Button";
 import { createEl } from "./helpers";
 
-const Header = () => {
+const Header = (onNewGame) => {
     const header = createEl('header', { className: 'header container' });
-    const newGameBtn = Button('btn-lg', 'New Game');
-    const leaderboardBtn = Button('btn-lg', 'Best results');
+    const newGameBtn = Button({ classes: 'btn-lg', text: 'New Game', onClick: onNewGame });
+    const leaderboardBtn = Button('btn-lg', 'Best results'); // TODO
     header.append(newGameBtn, leaderboardBtn);
 
     return header;
 }
 
+const renderGame = (el) => el.replaceChildren(newGame());
+
 export default () => {
     const main = createEl('main', { className: 'container' });
-    const content = newGame();
-    main.append(content)
-    return [Header(), main];
+    renderGame(main);
+    return [Header(() => renderGame(main)), main];
 }
 
 
