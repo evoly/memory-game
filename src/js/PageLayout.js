@@ -2,7 +2,7 @@ import newGame from "./game";
 import { giveUp } from "./game";
 import { createLeaderBoard } from "./resultes";
 import { NewGameButton, LeaderboardButton } from "./Button";
-// import { TestSection } from "./testSection";
+import { TestSection } from "./testSection";
 import { createEl } from "./helpers";
 
 const Header = ({onNewGame, onShowLeaderboard}) => {
@@ -31,7 +31,7 @@ export default () => {
             onShowLeaderboard: createLeaderBoard,
         }),
         main,
-        // TestSection(actions.giveUp),
+        TestSection(actions.giveUp),
     ];
 
 };
