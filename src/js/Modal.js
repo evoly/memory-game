@@ -1,8 +1,9 @@
-import newGame from "./game";
+// import newGame from "./game";
 import { createEl } from "./helpers";
-import { CloseButton, NewGameButton } from "./Button";
+import { CloseButton, NewGameButton } from "./Buttons";
 
 const createModal = (content, onNewGame) => {
+    console.log('onNewGame', onNewGame)
     const modal = createEl('dialog', {className: 'modal overlay'});    
     const modalInner = createEl('div', { className: 'modal-inner' });
     const modalContent = createEl('div', { className: 'modal-content' });
@@ -11,9 +12,13 @@ const createModal = (content, onNewGame) => {
     const closeModal = CloseButton(() => modal.close());
 
     if (onNewGame) {
-        const newGameBtn = NewGameButton(() => newGame());
+        const newGameBtn = NewGameButton(() => {
+            modal.close();
+            onNewGame();
+        });
         modalFooter.append(newGameBtn);
     }
+
 
     modalContent.append(...content);
     modalFooter.append(closeModal)

@@ -1,5 +1,6 @@
-import Button from "./Button";
+import Button from "./Buttons";
 import { createWinModal } from "./resultes";
+import { startNewGame } from "./PageLayout";
 
 import { createEl } from "./helpers";
 
@@ -25,7 +26,7 @@ export const TestSection = (openCards) => {
     const h2 = createEl('h2');
     h2.textContent = 'Testing section';
     const buttons = createEl('div', { className: 'test-section-buttons' });
-    buttons.append(FinishGameButton(openCards, toLocalStorage), ShowModalButton(() => createWinModal(7)))
+    buttons.append(FinishGameButton(openCards, toLocalStorage), ShowModalButton(() => createWinModal(7, startNewGame)))
     const description = createEl('div', { className: 'test-section-text' });
     const line1 = createEl('p', { className: '' });
     const line0 = createEl('p', { className: '' });

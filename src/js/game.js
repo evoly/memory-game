@@ -13,6 +13,7 @@ const createInitialState = () => ({
     timeOutId: null,
     showAll: false,
     cards: [],
+    onNewGame: null,
 });
 
 let state = createInitialState();
@@ -42,7 +43,9 @@ export const handleCardFlip = (card, id) => {
             const sorted = [...bestGames, newResult].sort((a, b) => a.moves - b.moves || a.date - b.date);
             const storageUpdated = sorted.slice(0, 10);
             localStorage.setItem('bestgames', JSON.stringify(storageUpdated));
-            setTimeout(() => createWinModal(state.moves), 800);
+            setTimeout(() => {
+                createWinModal(state.moves, state.onNewGame);
+            }, 800);
             
         }
         return
@@ -66,12 +69,17 @@ const createGameCards = () => {
     return selectedCards;
 }
 
-const newGame = () => {
+const newGame = (onNewGame) => {
     clearTimeout(state.timeOutId);
     resetState();
     state.cards = createGameCards();
+    state.onNewGame = onNewGame;
 
-    return gameBoard({ cardsData: state.cards, onCardFlip: handleCardFlip, showAll: state.showAll });
+    return gameBoard({
+        cardsData: state.cards,
+        onCardFlip: handleCardFlip,
+        showAll: state.showAll,
+    });
 }
 
 export default newGame;
