@@ -2,6 +2,8 @@ import data from './cards.json';
 import gameBoard from "./GameBoard";
 import { shuffle } from "./helpers";
 import { createWinModal } from './resultes';
+import MovesCounter from './MovesCounter';
+import { createEl } from "./helpers";
 
 const PAIRS_IN_GAME = 8;
 
@@ -14,6 +16,7 @@ const createInitialState = () => ({
     showAll: false,
     cards: [],
     onNewGame: null,
+    movesCounter: null,
 });
 
 let state = createInitialState();
@@ -28,6 +31,7 @@ export const handleCardFlip = (card, id) => {
     if (state.flippedCards.length < 2) return;
 
     state.moves += 1;
+    state.movesCounter.textContent = `Moves: ${state.moves}`;
 
     const [firstCard, secondCard] = state.flippedCards;
 
@@ -69,18 +73,23 @@ const createGameCards = () => {
     return selectedCards;
 }
 
-const newGame = (onNewGame) => {
+const newGame = () => {
     clearTimeout(state.timeOutId);
     resetState();
-    state.cards = createGameCards();
-    state.onNewGame = onNewGame;
 
-    return gameBoard({
+    state.cards = createGameCards();
+    state.movesCounter = MovesCounter();
+
+    const board = gameBoard({
         cardsData: state.cards,
         onCardFlip: handleCardFlip,
-        showAll: state.showAll,
     });
-}
+
+    const game = createEl('div', { className: 'game' });
+    game.append(state.movesCounter, board);
+
+    return game;
+};
 
 export default newGame;
 
