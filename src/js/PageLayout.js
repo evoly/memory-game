@@ -1,22 +1,39 @@
 import newGame from "./game";
-import Button from "./Button";
+import { giveUp } from "./game";
+import { leaderBoard } from "./resultes";
+import { NewGameButton, LeaderboardButton } from "./Button";
+// import { TestSection } from "./testSection";
 import { createEl } from "./helpers";
 
-const Header = (onNewGame) => {
+const Header = ({onNewGame, onShowLeaderboard}) => {
     const header = createEl('header', { className: 'header container' });
-    const newGameBtn = Button({ classes: 'btn-lg', text: 'New Game', onClick: onNewGame });
-    const leaderboardBtn = Button('btn-lg', 'Best results'); // TODO
-    header.append(newGameBtn, leaderboardBtn);
+    header.append(NewGameButton(onNewGame), LeaderboardButton(onShowLeaderboard));
 
     return header;
 }
 
-const renderGame = (el) => el.replaceChildren(newGame());
-
 export default () => {
     const main = createEl('main', { className: 'container' });
-    renderGame(main);
-    return [Header(() => renderGame(main)), main];
-}
+    const render = (view) => {
+        main.replaceChildren(view);
+    };
+
+    const actions = {
+        newGame: () => render(newGame()),
+        giveUp: () => render(giveUp()),
+    };
+
+    actions.newGame();
+
+    return [
+        Header({
+            onNewGame: actions.newGame,
+            onShowLeaderboard: leaderBoard,
+        }),
+        main,
+        // TestSection(actions.giveUp),
+    ];
+
+};
 
 
