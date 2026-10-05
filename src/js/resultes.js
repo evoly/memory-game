@@ -3,28 +3,30 @@ import createTable from "./ResultTable";
 import { createEl } from "./helpers";
 
 
-export const leaderBoard = () => {
+export const createLeaderBoard = () => {
     const bestGames = JSON.parse(localStorage.getItem('bestgames')) ?? null;
+    console.log('bestGames', bestGames)
+
+    if (!bestGames) {
+        const emptyTableText = createEl('div');
+        emptyTableText.textContent = 'Nothing here yet';
+        console.log('hello')
+        return createModal(emptyTableText);
+    }
+
     bestGames.forEach(game => {
         game.date = new Date(game.date).toLocaleDateString('ru');
     });
 
-    if (bestGames) {
-        return createModal(createTable(bestGames));
-    }
-
-    const emptyTableText = createEl('div');
-    emptyTableText.textContent = 'Nothing here yet';
-    console.log('hello')
-    return createModal(emptyTableText);
+    return createModal(createTable(bestGames));
 };
 
-export const finishGame = (moves) => {
+export const createWinModal = (moves) => {
     const header = createEl('h2');
     header.textContent = 'Congratulation!';
 
     const text = createEl('p');
     text.textContent = `You did it in ${moves} `;
 
-    return createModal([header, text]);
+    return createModal([header, text], true);
 }

@@ -1,6 +1,6 @@
 import newGame from "./game";
 import { giveUp } from "./game";
-import { leaderBoard } from "./resultes";
+import { createLeaderBoard } from "./resultes";
 import { NewGameButton, LeaderboardButton } from "./Button";
 // import { TestSection } from "./testSection";
 import { createEl } from "./helpers";
@@ -28,7 +28,7 @@ export default () => {
     return [
         Header({
             onNewGame: actions.newGame,
-            onShowLeaderboard: leaderBoard,
+            onShowLeaderboard: createLeaderBoard,
         }),
         main,
         // TestSection(actions.giveUp),

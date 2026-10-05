@@ -17,5 +17,5 @@ export const LeaderboardButton = (onSwowModal) =>
     Button({ classes: 'btn-lg', text: 'Best results', onClick: onSwowModal });
 
 export const CloseButton = (onClose) => 
-    Button({ classes: 'btn-close', text: 'Close', onClick: onClose });
+    Button({ classes: 'btn-lg', text: 'Close', onClick: onClose });
 

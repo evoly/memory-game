@@ -1,7 +1,7 @@
 import data from './cards.json';
 import gameBoard from "./GameBoard";
 import { shuffle } from "./helpers";
-// finishGame(5)
+import { createWinModal } from './resultes';
 
 const PAIRS_IN_GAME = 8;
 
@@ -37,12 +37,13 @@ export const handleCardFlip = (card, id) => {
         if (state.pairsToFind < 1) {
             console.log('congratz!');
             const bestGames = JSON.parse(localStorage.getItem('bestgames')) ?? [];
-            const currentDate = Date.now();
-            const newResult = { moves: state.moves, currentDate };
+            const date = Date.now();
+            const newResult = { moves: state.moves, date };
             const sorted = [...bestGames, newResult].sort((a, b) => a.moves - b.moves || a.date - b.date);
             const storageUpdated = sorted.slice(0, 10);
             localStorage.setItem('bestgames', JSON.stringify(storageUpdated));
-            // call modal createModal(moves);
+            setTimeout(() => createWinModal(state.moves), 800);
+            
         }
         return
     }
