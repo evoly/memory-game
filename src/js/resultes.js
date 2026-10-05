@@ -11,7 +11,7 @@ export const createLeaderBoard = () => {
         const emptyTableText = createEl('div');
         emptyTableText.textContent = 'Nothing here yet';
         console.log('hello')
-        return createModal(emptyTableText);
+        return createModal([emptyTableText]);
     }
 
     bestGames.forEach(game => {
@@ -23,10 +23,10 @@ export const createLeaderBoard = () => {
 
 export const createWinModal = (moves) => {
     const header = createEl('h2');
-    header.textContent = 'Congratulation!';
+    header.textContent = 'Congratulations!';
 
     const text = createEl('p');
-    text.textContent = `You did it in ${moves} `;
+    text.textContent = `You did it in ${moves} ${moves === 1 ? 'move' : 'moves'}!`;
 
     return createModal([header, text], true);
 }
