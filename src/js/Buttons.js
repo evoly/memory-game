@@ -1,9 +1,8 @@
 import { createEl } from "./helpers";
 
 const Button = ({classes, text, onClick}) => {
-    const button = createEl('button', {className: `btn ${classes}`});
+    const button = createEl('button', {className: `btn ${classes}`, type: 'button'});
     button.textContent = text;
-    console.log('onClick', onClick)
     button.addEventListener('click', onClick);
     return button
 }

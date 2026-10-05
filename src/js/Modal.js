@@ -3,7 +3,6 @@ import { createEl } from "./helpers";
 import { CloseButton, NewGameButton } from "./Buttons";
 
 const createModal = (content, onNewGame) => {
-    console.log('onNewGame', onNewGame)
     const modal = createEl('dialog', {className: 'modal overlay'});    
     const modalInner = createEl('div', { className: 'modal-inner' });
     const modalContent = createEl('div', { className: 'modal-content' });
@@ -29,7 +28,6 @@ const createModal = (content, onNewGame) => {
     body.append(modal);
 
     modal.addEventListener('click', ({ target }) => {
-        console.log('e', target)
         if (target === modal) {
             modal.close(); 
         }

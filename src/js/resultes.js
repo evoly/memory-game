@@ -5,12 +5,10 @@ import { createFireworks } from './fireworks';
 
 export const createLeaderBoard = () => {
     const bestGames = JSON.parse(localStorage.getItem('bestgames')) ?? null;
-    console.log('bestGames', bestGames)
 
     if (!bestGames) {
         const emptyTableText = createEl('div');
         emptyTableText.textContent = 'Nothing here yet';
-        console.log('hello')
         return createModal([emptyTableText]);
     }
 
@@ -21,9 +19,7 @@ export const createLeaderBoard = () => {
     return createModal(createTable(bestGames));
 };
 
-export const createWinModal = (moves, onNewGame) => {
-    console.log('onNewGame win', onNewGame);
-    
+export const createWinModal = (moves, onNewGame) => {    
     const header = createEl('h2');
     header.textContent = 'Congratulations!';
 

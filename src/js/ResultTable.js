@@ -1,7 +1,6 @@
 const tableHeader = ['#', 'Moves', 'Date'];
 
 const createTable = (results) => {
-    console.log('results', results)
     const table = document.createElement('table');
     table.classList.add('table');
     const head = table.createTHead();
@@ -12,7 +11,6 @@ const createTable = (results) => {
         headRow.append(th);
     });
     let counter = 1;
-    console.log('results:', results)
     results.forEach((result) => {
         const row = table.insertRow();
         const cell = row.insertCell();

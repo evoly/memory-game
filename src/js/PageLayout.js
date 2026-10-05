@@ -1,9 +1,10 @@
 import newGame from "./game";
 import { giveUp } from "./game";
+import { createEl } from "./helpers";
 import { createLeaderBoard } from "./resultes";
 import { NewGameButton, LeaderboardButton } from "./Buttons";
 import { TestSection } from "./testSection";
-import { createEl } from "./helpers";
+
 
 const Header = ({onNewGame, onShowLeaderboard}) => {
     const header = createEl('header', { className: 'header container' });
