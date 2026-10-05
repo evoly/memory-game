@@ -1,9 +1,8 @@
 import backImg  from './BackCardImg';
-import data from './cards.json';
-import { createEl, shuffle } from "./helpers";
+import { createEl } from "./helpers";
 
-const gameCard = (cardData, onCardFlip) => {
-    const card = createEl('div', { className: 'card'});
+const gameCard = (cardData, onCardFlip, show) => {
+    const card = createEl('div', { className: `card${show? ' flipped' : ''}`});
     const cardFront = createEl('img', { src: `${cardData.image}`, className: 'card-front', alt: 'card front image', });
     const cardBack = createEl('div', { className: 'card-back' });
     cardBack.append(backImg());
@@ -17,13 +16,10 @@ const gameCard = (cardData, onCardFlip) => {
     return card;
 }
 
-const gameBoard = ({ pairsToFind, onCardFlip }) => {
-    const cardsCollection = shuffle([...data]).slice(0, pairsToFind);
+const gameBoard = ({ cardsData, onCardFlip, showAll }) => {
+    const cards = cardsData.map((item) => gameCard(item, onCardFlip, showAll));
     const container = createEl('div', { className: 'game-board' });
-    const cards1 = cardsCollection.map((item) => gameCard(item, onCardFlip));
-    const cards2 = cardsCollection.map((item) => gameCard(item, onCardFlip));
-    const cards = shuffle([...cards1, ...cards2]);
-    
+
     container.append(...cards);
     return container
 }
