@@ -1,0 +1,257 @@
+:root {
+    --main-color: #431961;
+    --footer-color: rgba(210, 188, 219, 42%);
+    --background-color: #d6a7de33;
+    --track-color: rgba(210, 188, 219, 49%);
+    --duration-color: #f4eaea;
+    --player-background: #230339;
+    --card-background: #5c0e63;
+    --modal-background: #320935;
+    --second-color: #6942d517;
+    --text-light: #e2e4ee;
+    --text-light-xl: #fff;
+    --btn-hover: #6e327e;
+    --transition: all ease-in .3s;
+    --modalbackprop: #4b384cf0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--second-color);
+    min-height: 100vh;
+    margin: 0;
+    color: var(--main-color);
+}
+
+.container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 25px;
+    margin-bottom: 50px;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+}
+
+.cards.no-events .card {
+    pointer-events: none;
+}
+
+.card {
+    aspect-ratio: 13 / 12;
+    position: relative;
+    perspective: 800px;
+    color: var(--text-light-xl);
+}
+
+.card-back,
+.card-front {
+    background-color: var(--card-background);
+    border-radius: 15px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    backface-visibility: hidden;
+    cursor: pointer;
+}
+
+.card-front {
+    object-fit: none;
+    transform: rotateX(180deg);
+}
+
+.card.flipped {
+    pointer-events: none;
+}
+
+.card.flipped .card-front {
+    transform: rotateX(0);
+}
+
+.card.flipped .card-back {
+    transform: rotateX(180deg);
+}
+
+/*buttons*/
+.btn {
+    background-color: transparent;
+    border: transparent;
+    cursor: pointer;
+}
+
+.btn-lg {
+    padding: 10px 20px;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    color: var(--text-light-xl);
+    border-radius: 10px;
+    background-color: var(--card-background);
+    transition: var(--transition);
+    font-weight: 600;
+
+    &:focus-visible {
+        outline-color: var(--card-background);
+    }
+}
+
+.btn-lg:hover {
+    background-color: var(--btn-hover);
+}
+
+/*modal*/
+
+.modal {
+    background-color: var(--modal-background);
+    border: 0;
+    border-radius: 12px;
+
+    &::backdrop {
+        background-color: var(--modalbackprop);
+    }
+}
+
+.modal-inner {
+    position: relative;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    font-size: 1.7rem;
+
+    color: var(--text-light-xl);
+    text-align: center;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+    .btn-lg {
+        background-color: var(--modal-background);
+
+        &:hover {
+            background-color: var(--btn-hover);
+        }
+    }
+}
+
+/* table */
+
+.table {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    border-collapse: collapse;
+
+    th {
+        padding: 5px;
+    }
+
+    td {
+        text-align: center;
+        padding: 10px;
+    }
+
+    tr {
+        border-bottom: 1px solid var(--card-background);
+    }
+}
+
+.fireworks {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.counter {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.7rem;
+    margin-bottom: 10px;
+}
+
+/*test-section */
+
+.test-section {
+    margin-top: 40px;
+    padding: 20px;
+    font-size: 1.5rem;
+    border-top: 2px solid var(--card-background);
+}
+
+.test-section-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.test-section .accordion-header {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: var(--card-background);
+    border-radius: 10px;
+    color: var(--text-light);
+    padding-left: 10px;
+    padding-right: 10px;
+
+    &:hover {
+        background-color: var(--btn-hover);
+    }
+
+}
+
+.test-section .accordion-header::after {
+    content: '+';
+    transition: transform 0.2s ease;
+}
+
+.test-section.open .accordion-header::after {
+    content: '-';
+}
+
+.test-section .accordion-body {
+    padding-top: 15px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.25s ease;
+}
+
+.test-section.open .accordion-body {
+    max-height: 500px;
+}
