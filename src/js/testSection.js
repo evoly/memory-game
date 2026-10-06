@@ -22,20 +22,36 @@ const ShowModalButton = (showModal) =>
     Button({ classes: 'btn-lg', text: 'Show modal', onClick: showModal });
 
 export const TestSection = (openCards) => {
-    const container = createEl('div', { className: 'container test-section'});
-    const h2 = createEl('h2');
-    h2.textContent = 'Testing section';
-    const buttons = createEl('div', { className: 'test-section-buttons' });
-    buttons.append(FinishGameButton(openCards, toLocalStorage), ShowModalButton(() => createWinModal(7, startNewGame)))
-    const description = createEl('div', { className: 'test-section-text' });
-    const line1 = createEl('p', { className: '' });
-    const line0 = createEl('p', { className: '' });
-    line0.textContent = 'These buttons are for demo/testing purposes only.'
-    line1.textContent = 'Show all — reveals all cards on the game board and saves a result to localStorage with a random number of moves (10–20) and the current date.'
-    const line2 = createEl('p', { className: '' });
-    line2.textContent = 'Show modal — displays the modal shown after the game is completed, so you don’t have to play through the game to test it :)';
-    description.append(line0, line1, line2);
-    container.append(h2, buttons, description);
-    return container;
-}
+    const container = createEl('div', { className: 'container test-section' });
 
+    // --- Accordion header ---
+    const h2 = createEl('h2', { className: 'accordion-header' });
+    h2.textContent = 'Testing section';
+
+    // --- Accordion body (everything that collapses) ---
+    const body = createEl('div', { className: 'accordion-body' });
+
+    const buttons = createEl('div', { className: 'test-section-buttons' });
+    buttons.append(
+        FinishGameButton(openCards, toLocalStorage),
+        ShowModalButton(() => createWinModal(7, startNewGame))
+    );
+
+    const description = createEl('div', { className: 'test-section-text' });
+    const header = createEl('h3');
+    const line1 = createEl('p');
+    const line2 = createEl('p');
+    header.textContent = 'These buttons are for demo/testing purposes only.';
+    line1.textContent = 'Show all — reveals all cards on the game board and saves a result to localStorage with a random number of moves (10–20) and the current date.';
+    line2.textContent = 'Show modal — displays the modal shown after the game is completed, so you don’t have to play through the game to test it :)';
+    description.append(line1, line2);
+
+    body.append(header, buttons, description);
+
+    h2.addEventListener('click', () => {
+        container.classList.toggle('open');
+    });
+
+    container.append(h2, body);
+    return container;
+};

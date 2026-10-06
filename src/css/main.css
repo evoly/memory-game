@@ -185,6 +185,7 @@ body {
         border-bottom: 1px solid var(--card-background);
     }
 }
+
 .fireworks {
     position: absolute;
     inset: 0;
@@ -201,10 +202,10 @@ body {
 }
 
 /*test-section */
+
 .test-section {
     margin-top: 40px;
     padding: 20px;
-    padding-top: 0;
     font-size: 1.5rem;
     border-top: 2px solid var(--card-background);
 }
@@ -212,4 +213,45 @@ body {
 .test-section-buttons {
     display: flex;
     gap: 20px;
+}
+
+.test-section .accordion-header {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: var(--card-background);
+    border-radius: 10px;
+    color: var(--text-light);
+    padding-left: 10px;
+    padding-right: 10px;
+
+    &:hover {
+        background-color: var(--btn-hover);
+    }
+
+}
+
+.test-section .accordion-header::after {
+    content: '+';
+    transition: transform 0.2s ease;
+}
+
+.test-section.open .accordion-header::after {
+    content: '-';
+}
+
+.test-section .accordion-body {
+    padding-top: 15px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.25s ease;
+}
+
+.test-section.open .accordion-body {
+    max-height: 500px;
 }
