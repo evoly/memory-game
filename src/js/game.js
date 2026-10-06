@@ -2,7 +2,7 @@ import data from './cards.json';
 import gameBoard from "./GameBoard";
 import { shuffle } from "./helpers";
 import { createWinModal } from './resultes';
-import MovesCounter from './MovesCounter';
+import { MovesCounter, OpenPairsCounter, GameCounters } from './Counters';
 import { createEl } from "./helpers";
 
 const PAIRS_IN_GAME = 8;
@@ -31,13 +31,15 @@ export const handleCardFlip = (card, id) => {
     if (state.flippedCards.length < 2) return;
 
     state.moves += 1;
-    state.movesCounter.textContent = `Moves: ${state.moves}`;
+    state.movesCounter.textContent = state.moves;
 
     const [firstCard, secondCard] = state.flippedCards;
 
     if (firstCard.id === secondCard.id) {
         state.pairsToFind -= 1;
         state.flippedCards = [];
+
+        state.openPairsData.textContent = PAIRS_IN_GAME - state.pairsToFind;
 
         if (state.pairsToFind < 1) {
             console.log('congratz!');
@@ -77,7 +79,25 @@ const newGame = () => {
     resetState();
 
     state.cards = createGameCards();
-    state.movesCounter = MovesCounter();
+
+    const {
+        counter: movesContainer,
+        conunterData: movesCounter,
+    } = MovesCounter();
+
+    state.movesCounter = movesCounter;
+
+    const {
+        counter: openPairsContainer,
+        conunterData: pairsCounter,
+    } = OpenPairsCounter();
+
+    state.openPairsData = pairsCounter;
+
+    const counters = GameCounters(
+        movesContainer,
+        openPairsContainer
+    );
 
     const board = gameBoard({
         cardsData: state.cards,
@@ -85,7 +105,7 @@ const newGame = () => {
     });
 
     const game = createEl('div', { className: 'game' });
-    game.append(state.movesCounter, board);
+    game.append(counters, board);
 
     return game;
 };

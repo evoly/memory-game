@@ -193,7 +193,9 @@ body {
     pointer-events: none;
 }
 
-.moves-counter {
+.counter {
+    display: flex;
+    justify-content: space-between;
     font-size: 1.7rem;
     margin-bottom: 10px;
 }
